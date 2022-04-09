@@ -1,0 +1,442 @@
+body {
+ 
+  font-family: 'Inter', sans-serif;
+  
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&display=swap');
+
+$primary:#1B1C25;
+$secondary:#FF7644;
+$ternary:#9C9FA2;
+.app{
+   display: flex;
+   flex-direction: column;
+    max-width: 100%;
+    min-height: 100vh;
+    background-color:$primary;
+    color: white;
+    overflow: hidden;
+    
+}
+
+.nav_wrapper{
+     padding:40px 116px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+
+    img{
+        width: 88px;
+        height: 30px;
+    }
+    
+
+    .nav_menu{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 270px;
+        list-style: none;
+        .nav_item{
+            font-size:1rem;
+            font-weight: 400;
+        }
+    }
+
+    .icons{
+        width: 160px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
+
+
+
+.left_content{
+    display: flex;
+    flex-direction: column;
+    
+    height: max-content;
+    margin: 118px 0 0 118px;
+
+    h3{
+        font-size: 1.5rem;
+        color: $secondary;
+        font-weight: 300;
+    }
+    h1{
+        font-size: 6rem;
+        font-weight: 600;
+    }
+    .price{
+        font-size: 1.5rem;
+        color: $secondary;
+        del{
+            font-size: 1rem;
+            color: #9C9FA2;
+        }
+    }
+    .checkout{
+        width: 188px;
+        height: 49px;
+        padding: 8px 30px; 
+        margin: 20px;
+        margin-left: 0;
+        background-color:$secondary ;
+        border-radius: 12px;
+        color: #fff;
+        border: none;
+        .arr{
+            transform: rotate(-45deg) ;
+        }
+        &:hover{
+            background-color: #3b3c41;
+            
+           cursor: pointer;
+           transition:all 0.8s ease-in-out;
+        }
+    }
+
+    .bag{
+        width: 48px;
+        height: 44px;
+        
+        background-color: #1B1C25;
+        border: 1px solid gray;
+        color: #fff;
+        border-radius: 10px;
+    }
+}
+
+.shoelist{
+    display: flex;
+    
+}
+.circle{margin : 15px;
+    width: 95px;
+    height: 95px;
+    background-color: rgba(255, 255, 255, 0.089);
+    border-radius: 100px;
+    position: relative;
+    .cirshoe{
+        position: absolute;
+        top: -30px;
+        left: -30px;
+       
+        width: 130px;
+        transform: rotate(-25deg);
+    }
+}
+
+
+
+.main{
+    display: flex;
+}
+.rightcont{
+
+    margin: 118px 0 0 130px  ;
+    position: relative;
+    .textimg{
+       
+       font-size: 24rem;
+       font-weight: 650;
+       letter-spacing: 30px;
+       color:rgba(0, 0, 0, 0.034);
+       -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.055);
+    }
+
+    img{
+        width:800px;
+        
+        position: absolute;
+        top: -300px;
+        left: 20%;
+        transform-origin: center center;
+        transform: scaleX(-1) translateY(35%);
+    }
+    .org{
+       position: absolute;
+       top: 70%;
+       left: 45%;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgb(219, 31, 31);
+        color: white;
+        font-size: 2rem;
+        border: none;
+    }
+}
+
+
+
+
+
+.features{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8rem auto;
+   
+    .brand{
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        gap: 2rem;
+    }
+    .shoecard{
+        width: max-content;
+        height: 500px;
+        display: flex;
+        flex-direction:column;
+        justify-content:space-evenly;
+        align-items: center;
+        
+        
+       .cardimg{
+        width: 280px;
+        height: 360px;
+        background-color: #fff;
+        border-radius: 15px;
+        
+     border: 6px solid rgba(0, 0, 0, 0.774);
+        img{
+            width: 270px;
+          
+            transform-origin: center center;
+            transform: rotate(-25deg)  translateX(-15px);
+           
+        }
+        &:hover{
+            background-color: #1B1C25;
+            border-color:rgb(102, 96, 96) ;
+           cursor: pointer;
+           transition:all 0.8s ease-in-out;
+        }
+       }
+       
+        
+        p{
+            span{
+                color: #FF7644;
+            }
+            font-size: 0.8rem;
+        }
+        h2{
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        h1{
+            color: #FF7644;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    }
+}
+
+
+
+.ourstore{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  
+    .brand{
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    .storelist{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        list-style: none;
+        width: 400px;
+        margin: 40px 0;
+        .listitem{
+            background-color: #9c9fa210;
+            border-radius: 8px;
+           padding: 13px 26px;
+           &:hover{
+            background-color: #3b3c41;
+            
+           cursor: pointer;
+           transition:all 0.8s ease-in-out;
+        }
+        }
+        .selecteditem{
+            background-color: $secondary;
+        }
+       
+    }
+   
+   .storecards{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    gap: 2rem;
+    margin: 0 120px;
+    .shoecard{
+        width: max-content;
+        height: 500px;
+        display: flex;
+        flex-direction:column;
+        justify-content:space-evenly;
+        align-items: center;
+        
+        
+        .cardimg{
+            width: 280px;
+            height: 360px;
+            background-color: #fff;
+            border-radius: 15px;
+            
+         border: 6px solid rgba(0, 0, 0, 0.774);
+            img{
+                width: 270px;
+              
+                transform-origin: center center;
+                transform:  rotate(-25deg) translateX(-15px);
+                
+            }
+            &:hover{
+                background-color: #1B1C25;
+                border-color:rgb(102, 96, 96) ;
+               cursor: pointer;
+               transition:all 0.8s ease-in-out;
+            }
+           }
+           .cardimgs{
+            width: 280px;
+            height: 360px;
+            background-color: #fff;
+            border-radius: 15px;
+            
+         border: 6px solid rgba(0, 0, 0, 0.774);
+     
+            img{
+                width: 270px;
+              
+                transform-origin: center center;
+               
+                transform: scaleX(-1) rotate(25deg) ;
+            }
+            &:hover{
+                background-color: #1B1C25;
+                border-color:rgb(102, 96, 96) ;
+               cursor: pointer;
+               transition:all 0.8s ease-in-out;
+            }
+           }  
+        p{
+            span{
+                color: #FF7644;
+            }
+            font-size: 0.8rem;
+        }
+        h2{
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        h1{
+            color: #FF7644;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    }
+   }
+}
+
+
+
+
+
+
+
+.newproducts{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8rem auto;
+   
+    .brand{
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        gap: 2rem;
+    }
+    .shoecard{
+        width: max-content;
+        height: 500px;
+        display: flex;
+        flex-direction:column;
+        justify-content:space-evenly;
+        align-items: center;
+        
+        
+       .cardimg{
+        width: 280px;
+        height: 360px;
+        background-color: #fff;
+        border-radius: 15px;
+        
+     border: 6px solid rgba(0, 0, 0, 0.774);
+        img{
+            width: 270px;
+          
+            transform-origin: center center;
+            transform: rotate(-25deg)  translateX(-15px);
+           
+        }
+        &:hover{
+            background-color: #1B1C25;
+            border-color:rgb(102, 96, 96) ;
+           cursor: pointer;
+           transition:all 0.8s ease-in-out;
+        }
+       }
+       
+        
+        p{
+            span{
+                color: #FF7644;
+            }
+            font-size: 0.8rem;
+        }
+        h2{
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        h1{
+            color: #FF7644;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    }
+}
