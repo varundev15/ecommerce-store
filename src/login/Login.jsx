@@ -26,10 +26,10 @@ function Login() {
      if(data.status === false){
        alert(data.msg);
      }  
-     if(data.status === true){
-      localStorage.setItem("user-data",JSON.stringify(data.user))
-    }  
+     
+    if(data.status === true){
     navigate("/");
+    }
     }
   }
 

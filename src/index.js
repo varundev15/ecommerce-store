@@ -9,8 +9,9 @@ import Register from "./register/Register"
 
 ReactDOM.createRoot(document.querySelector("#root")).render(<BrowserRouter>
   <Routes>
-   <Route path="/" element={<App />} />
+  <Route path="/" element={<App />} />
    <Route path="register" element={<Register />} />
    <Route path="login" element={<Login />} />
+   
  </Routes>
 </BrowserRouter>);
