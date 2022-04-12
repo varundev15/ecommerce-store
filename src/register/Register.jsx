@@ -19,7 +19,7 @@ function Register() {
     console.log("valid",registerRoute)
    if(handleValidation()){
     console.log("complete validation")
-     const {password,confirm,username,email}=values;
+     const {password,username,email}=values;
      const {data} = await axios.post(registerRoute,{
        username,
        email,
@@ -29,9 +29,9 @@ function Register() {
        alert(data.msg);
      }  
      if(data.status === true){
-      localStorage.setItem("user-data",JSON.stringify(data.user))
+      navigate("/");
     }  
-    navigate("/");
+    
     }
   }
 

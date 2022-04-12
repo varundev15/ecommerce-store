@@ -20,7 +20,7 @@ import { getProducts } from './utils/APIRoutes';
 function App() {
 
   const [productDataStore, setproductDataStore] = useState([]);
-
+  
   useEffect(() => {
     let getAllProducts = async () => {
       let res = await axios.get(getProducts);
@@ -93,7 +93,7 @@ function App() {
       </div>
 
 
-      <Features data={productDataStore}/>
+      <Features data={productDataStore} />
       <Ourstore data={productDataStore} />
       <Newproducts data={productDataStore}/>
       <Footer/>
@@ -103,15 +103,16 @@ function App() {
 
 
 
-function Features({data}) {
+function Features({data,showpopup,setPopup}) {
+  
   return (
     <div className={styles.features}>
       <h1 className={styles.brand}>Featured Items</h1>
-      <div className={styles.cards}>
+      <div className={styles.cards} >
       {
           data.slice(5,9).map((ele) => {
             return (
-              <div key={ele._id} className={styles.shoecard}>
+              <div key={ele._id} className={styles.shoecard} >
                 <div className={styles.cardimg}><img src={ele.images[0]} alt="" /></div>
                 <p><span>	&#9733;</span>{`{${Math.floor(Math.random()*5)+1}.0}`}</p>
                 <h2>{ele.name}</h2>
