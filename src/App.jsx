@@ -12,33 +12,23 @@ import {
   faArrowRight,
   faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import {faFacebookF,faInstagram,faGithub,faTwitter,faCcVisa, faGooglePay,   faCcAmazonPay} from "@fortawesome/free-brands-svg-icons"
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { getProducts } from './utils/APIRoutes';
+import { faFacebookF, faInstagram, faGithub, faTwitter, faCcVisa, faGooglePay, faCcAmazonPay } from "@fortawesome/free-brands-svg-icons"
+import {  useContext,useState } from "react";
+
+import dataContext from "./context/data";
+import { useNavigate } from 'react-router-dom';
 
 function App() {
 
-  const [productDataStore, setproductDataStore] = useState([]);
   
-  useEffect(() => {
-    let getAllProducts = async () => {
-      let res = await axios.get(getProducts);
-      if (res.data.status === true) {
-        setproductDataStore(res.data.data);
-      }
-      else {
-        alert("Network error boiiiiiii");
-      }
-    }
-    getAllProducts();
-  }, [])
-
+  const [inputVal, setInputVal] = useState([]);
+  const [productDataStore, setproductDataStore, selectedProduct, setselectedProduct] = useContext(dataContext);
+  let navigate = useNavigate();
   console.log(productDataStore);
-
   return (
     <div className={styles.app}>
-      <div className={styles.nav_wrapper}>
+     
+    <div className={styles.nav_wrapper}>
         <img src={nike} alt="" />
         <ul className={styles.nav_menu}>
           <li className={styles.nav_item}>Home</li>
@@ -46,12 +36,34 @@ function App() {
           <li className={styles.nav_item}>women</li>
           <li className={styles.nav_item}>Kids</li>
         </ul>
+        
         <div className={styles.icons}>
-          <FontAwesomeIcon icon={faSearch} className={styles.faicons} />
-          <FontAwesomeIcon icon={faHeart} className={styles.faicons} />
-          <FontAwesomeIcon icon={faShop} className={styles.faicons} />
+        
+          <div className={styles.bar}>
+            <input type="text" placeholder="Search" id={styles.inp} list="suggestion"  onChange={(e)=>{setInputVal(e.target.value)}}/>
+            
+            <FontAwesomeIcon icon={faSearch} className={styles.faicon} onClick={() => {  setselectedProduct(inputVal);
+              navigate('/productCart') }}  />
+            {/* setselectedProduct(productDataStore.indexOf(inputVal)); navigate('/productCart')*/}
+          </div>
+          
+          <FontAwesomeIcon icon={faHeart} className={styles.faicon} />
+          <FontAwesomeIcon icon={faShop} className={styles.faicon} />
         </div>
       </div>
+      <datalist id="suggestion" >
+      {productDataStore.map((val,id)=>{
+          return (
+            <option value={val.name} >
+              {val.name}
+            </option>
+          )
+        })}
+
+      </datalist>
+    
+      
+      
       <div className={styles.main}>
         <div className={styles.left_content}>
           <h3>Nike Shoe Collection</h3>
@@ -93,42 +105,45 @@ function App() {
       </div>
 
 
-      <Features data={productDataStore} />
-      <Ourstore data={productDataStore} />
-      <Newproducts data={productDataStore}/>
-      <Footer/>
+      <Features data={productDataStore} setselectedProduct={setselectedProduct} />
+      <Ourstore data={productDataStore} setselectedProduct={setselectedProduct}/>
+      <Newproducts data={productDataStore} setselectedProduct={setselectedProduct}/>
+      <Footer />
     </div>
   );
 }
 
 
 
-function Features({data,showpopup,setPopup}) {
-  
+function Features({ data, setselectedProduct }) {
+
+  let navigate = useNavigate();
+    
   return (
     <div className={styles.features}>
       <h1 className={styles.brand}>Featured Items</h1>
       <div className={styles.cards} >
-      {
-          data.slice(5,9).map((ele) => {
+        {
+          data.slice(5, 9).map((ele, id) => {
             return (
-              <div key={ele._id} className={styles.shoecard} >
+              <div key={ele._id} className={styles.shoecard} onClick={() => { setselectedProduct(data.indexOf(ele)); navigate('/productCart') }} >
                 <div className={styles.cardimg}><img src={ele.images[0]} alt="" /></div>
-                <p><span>	&#9733;</span>{`{${Math.floor(Math.random()*5)+1}.0}`}</p>
+                <p><span>	&#9733;</span>{`{${Math.floor(Math.random() * 5) + 1}.0}`}</p>
                 <h2>{ele.name}</h2>
                 <h1>₹{ele.price}</h1>
               </div>
             )
           })
         }
-       
+
       </div>
     </div>
   )
 }
 
 
-function Ourstore({ data }) {
+function Ourstore({ data, setselectedProduct  }) {
+  let navigate = useNavigate();
   return (
     <div className={styles.ourstore}>
       <h1 className={styles.brand}>Our Store</h1>
@@ -140,11 +155,11 @@ function Ourstore({ data }) {
       </ul>
       <div className={styles.storecards}>
         {
-          data.slice(0,9).map((ele) => {
+          data.slice(0, 9).map((ele) => {
             return (
-              <div key={ele._id} className={styles.shoecard}>
+              <div key={ele._id} className={styles.shoecard} onClick={() => { setselectedProduct(data.indexOf(ele)); navigate('/productCart') }}>
                 <div className={styles.cardimg}><img src={ele.images[0]} alt="" /></div>
-                <p><span>	&#9733;</span>{`{${Math.floor(Math.random()*5)+1}.0}`}</p>
+                <p><span>	&#9733;</span>{`{${Math.floor(Math.random() * 5) + 1}.0}`}</p>
                 <h2>{ele.name}</h2>
                 <h1>₹{ele.price}</h1>
               </div>
@@ -157,47 +172,48 @@ function Ourstore({ data }) {
 }
 
 
-function Newproducts({data}) {
+function Newproducts({ data, setselectedProduct  }) {
+  let navigate = useNavigate();
   return (
     <div className={styles.newproducts}>
       <h1 className={styles.brand}>New Products</h1>
       <div className={styles.cards}>
-      {
-          data.slice(14,18).map((ele) => {
+        {
+          data.slice(16, 20).map((ele) => {
             return (
-              <div key={ele._id} className={styles.shoecard}>
+              <div key={ele._id} className={styles.shoecard} onClick={() => { setselectedProduct(data.indexOf(ele)); navigate('/productCart') }}>
                 <div className={styles.cardimg}><img src={ele.images[0]} alt="" /></div>
-                <p><span>	&#9733;</span>{`{${Math.floor(Math.random()*5)+1}.0}`}</p>
+                <p><span>	&#9733;</span>{`{${Math.floor(Math.random() * 5) + 1}.0}`}</p>
                 <h2>{ele.name}</h2>
                 <h1>₹{ele.price}</h1>
               </div>
             )
           })
         }
-        
+
       </div>
     </div>
   )
 }
 
-function Footer(){
-  return(
+function Footer() {
+  return (
     <footer className={styles.footer}>
       <div className={styles.top_sec}>
         <div className={styles.socialicons}>
-        <FontAwesomeIcon icon={faFacebookF} className={styles.icn+" "+styles.selecteditem}/>
-        <FontAwesomeIcon icon={faInstagram} className={styles.icn}/>
-        <FontAwesomeIcon icon={faGithub} className={styles.icn}/>
-        <FontAwesomeIcon icon={faTwitter} className={styles.icn}/>
+          <FontAwesomeIcon icon={faFacebookF} className={styles.icn + " " + styles.selecteditem} />
+          <FontAwesomeIcon icon={faInstagram} className={styles.icn} />
+          <FontAwesomeIcon icon={faGithub} className={styles.icn} />
+          <FontAwesomeIcon icon={faTwitter} className={styles.icn} />
         </div>
         <img src={nike} alt="" />
         <div className={styles.pay}>
-        <FontAwesomeIcon icon={faCcVisa} className={styles.icon}/>
-        <FontAwesomeIcon icon={faGooglePay} className={styles.icon}/>
-        <FontAwesomeIcon icon={faCcAmazonPay} className={styles.icon}/>
-       
+          <FontAwesomeIcon icon={faCcVisa} className={styles.icon} />
+          <FontAwesomeIcon icon={faGooglePay} className={styles.icon} />
+          <FontAwesomeIcon icon={faCcAmazonPay} className={styles.icon} />
+
         </div>
- 
+
       </div>
       <div className={styles.cont}>
         <div className={styles.data}>
@@ -233,7 +249,7 @@ function Footer(){
           <ul className={styles.menu}>
             <li className={styles.item}>Your Feedback </li>
             <li className={styles.item}>&#9733;&#9733;&#9733;&#9733;&#9733;</li>
-           
+
           </ul>
         </div>
       </div>
